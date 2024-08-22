@@ -4,6 +4,7 @@ import { User, MessageCircle } from 'lucide-react';
 import harmoniumImage from './assets/harmonium-1.jpg';
 
 // HarmoniumImage component
+
 const HarmoniumImage1 = () => {
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
 
@@ -13,22 +14,31 @@ const HarmoniumImage1 = () => {
     img.onload = () => {
       const aspectRatio = img.width / img.height;
       const screenHeight = window.innerHeight;
-      const calculatedHeight = screenHeight * 0.3;
+      const calculatedHeight = screenHeight * 0.5;
       const calculatedWidth = calculatedHeight * aspectRatio;
-      setImageSize({ width: calculatedWidth, height: calculatedHeight });
+      setImageSize({ width: calculatedWidth, height: calculatedHeight*0.66 });
     };
   }, []);
 
   return (
-    <div
-      className="bg-cover bg-center bg-no-repeat rounded-lg shadow-lg blur-xs"
+    <div className="relative rounded-lg shadow-lg"
       style={{
-        backgroundImage: `url(${harmoniumImage})`,
         width: `${imageSize.width}px`,
         height: `${imageSize.height}px`,
-      }}
-    >
-      {/* Add any content inside the view if needed */}
+      }}>
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat rounded-lg blur-xs"
+        style={{
+          backgroundImage: `url(${harmoniumImage})`,
+        }}>
+      </div>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <div className="text-white text-7xl font-bold">
+          Create
+        </div>
+        <div className="text-slate-400 text-small">
+          New chords
+        </div>
+      </div>
     </div>
   );
 };
